@@ -323,7 +323,25 @@ directory with the reason. Falsified in both directions before re-pushing. Regis
   swallowed by the red one. The signal that mattered — the code is fine, the docs are not —
   survived.
 
-| **CI verdict** | run 1 on `a2a53a0`: **red**, cause found and fixed forward. Run 2 pending on the fix commit. |
+### CI run 2 — `8ac20e2` — CI **green**, deploy blocked on a repository setting
+
+| Workflow | Verdict |
+|---|---|
+| **CI** — `Code — types, tests, build` | **success** |
+| **CI** — `Doc consistency` | **success** — the `F-007` fix holds on a fresh checkout, which is the only place it could be proven |
+| **Deploy** — `Build site` | failure at `actions/configure-pages@v5`. **`All four gates` passed first**, so the fix is confirmed in both workflows. |
+| **Deploy** — `Publish` | skipped |
+
+**Cause: GitHub Pages had never been enabled on the repository**, so `configure-pages` had nothing
+to configure. Not a defect in the code, the docs or the workflow — a repository setting, and one
+only the owner can change. Enabled by the owner; the deploy re-runs on the next push.
+
+**The sprint was deliberately not closed on "CI is green, deploy is only a setting."** That may
+well be true, but the rule says a red run means not closed, and inventing an exception for an
+inconvenient run is the move rule 4 exists to stop. The honest path was to fix the setting and
+run it again.
+
+| **CI verdict** | run 1 `a2a53a0`: **red** (`F-007`, fixed forward) · run 2 `8ac20e2`: CI **green**, deploy red on an unset Pages source · run 3 pending |
 
 The link count is recorded as a number rather than a word so a later drop in coverage is visible
 as a number — the gate's own lesson, applied to the gate's own evidence.

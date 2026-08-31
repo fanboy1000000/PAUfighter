@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Jobs are deliberately independent unless one consumes another's artifacts.
+  # Chaining them means one red job silently skips the others, and a signal that
+  # never runs is a signal nobody reads.
+
+  code:
+    name: Code — types, tests, build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+
+      - run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Tests
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload build output
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+          retention-days: 7
+
+  docs:
+    name: Doc consistency
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      # The doc gate has no dependencies by design, so it needs no install and
+      # cannot be blocked by one failing.
+      #
+      # What it checks is defined once, in the header block of tools/check-docs.mjs.
+      # It is deliberately NOT enumerated here: the copy that used to live in this
+      # comment listed three checks after the script had grown to four, so the file
+      # an engineer reads to learn what CI enforces understated it — and a comment
+      # claiming LESS than it runs produces a surprised red build, which is the same
+      # defect as claiming more, inverted.
+      - name: Doc-consistency gate
+        run: node tools/check-docs.mjs

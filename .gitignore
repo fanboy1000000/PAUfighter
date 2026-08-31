@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.vite/
+
+# Working material, not records. Refinements that matter are summarised into the
+# sprint log; the raw file is scratch (WORKFLOW.md step 0b).
+.claude/refinements/
+
+# Review artifacts are recorded in the sprint log, not kept as loose files.
+.claude/reviews/
+
+*.local
+.DS_Store
+Thumbs.db
+.vs/
+.idea/

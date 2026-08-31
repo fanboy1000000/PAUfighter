@@ -1,0 +1,61 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time. Do not cancel a running deploy — a half-finished
+# deployment is worse than a slightly stale one.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+
+      - run: npm ci
+
+      # Deploying an untested build would make CI decorative. All FOUR gates run here,
+      # not three — `npm run verify` is typecheck, tests, build, and the doc-consistency
+      # gate, defined once in package.json.
+      #
+      # The doc gate blocks publication too, which is deliberate rather than incidental.
+      # This workflow and ci.yml are independent workflows on the same trigger, so a red
+      # `docs` job over there would not hold up a publish here; and a manual
+      # workflow_dispatch of this file does not require ci.yml to have run at all.
+      # Running the full set here is what keeps "publish anyway, just this once" from
+      # being one click away — WORKFLOW.md, "The rules that have no exceptions", rule 4.
+      - name: All four gates
+        run: npm run verify
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    name: Publish
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

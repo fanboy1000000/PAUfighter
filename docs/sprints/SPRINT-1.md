@@ -2,10 +2,10 @@
 
 | Field | Value |
 |---|---|
-| **Status** | in progress — records written, all four gates green, awaiting the owner's word to push (step 7 item 6) |
-| **Dates** | 2026-08-31 → |
+| **Status** | complete (with carry-forward) |
+| **Dates** | 2026-08-31 → 2026-08-31 |
 | **Goal** | Stand up the multi-agent governance harness, and prove it works by taking one small real change all the way through the loop: a seeded dice roller that makes invariant I1 true at the foundation. |
-| **Owner approved** | no |
+| **Owner approved** | yes — 2026-08-31 (push authorised; Pages source set by the owner) |
 
 ## What this sprint is, in one paragraph
 
@@ -341,7 +341,22 @@ well be true, but the rule says a red run means not closed, and inventing an exc
 inconvenient run is the move rule 4 exists to stop. The honest path was to fix the setting and
 run it again.
 
-| **CI verdict** | run 1 `a2a53a0`: **red** (`F-007`, fixed forward) · run 2 `8ac20e2`: CI **green**, deploy red on an unset Pages source · run 3 pending |
+### CI run 3 — `d695af2` — **GREEN**, and the site is live
+
+| Workflow | Verdict |
+|---|---|
+| **CI** — `Code — types, tests, build` | **success** |
+| **CI** — `Doc consistency` | **success** |
+| **Deploy** — `Build site` | **success** |
+| **Deploy** — `Publish` | **success** |
+
+Verified by fetching the published site rather than by trusting the workflow's own word:
+`https://fanboy1000000.github.io/PAUfighter/` returns **HTTP 200**, 329 bytes, and the bundled
+JavaScript it references (`/PAUfighter/assets/index-DVX4EIBs.js`) returns **HTTP 200**, 830 bytes.
+A green deploy job and a serving site are two different claims; the second is the one that
+matters.
+
+| **CI verdict** | **green** — run 3 on `d695af2`, watched to completion, site confirmed serving. Preceded by run 1 `a2a53a0` red (`F-007`, fixed forward) and run 2 `8ac20e2` CI-green/deploy-red on an unset Pages source. |
 
 The link count is recorded as a number rather than a word so a later drop in coverage is visible
 as a number — the gate's own lesson, applied to the gate's own evidence.

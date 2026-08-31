@@ -1,0 +1,6 @@
+Git cannot store an empty directory, so this file exists to keep the FAIL
+category present in a fresh clone. Without it, INDEX.md's link to failures/
+resolves on a working tree that has the directory and breaks in CI, which is
+exactly what happened on Sprint 1's first push.
+
+Delete this once the first FAIL record lands.

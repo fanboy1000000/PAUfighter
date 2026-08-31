@@ -181,13 +181,34 @@ function checkLocalLinks() {
       if (/^(?:[a-z][a-z0-9+.-]*:|#|\/\/)/i.test(target)) continue; // external or anchor
       const path = resolve(dirname(doc), target.split("#")[0]);
       checked++;
-      if (!existsSync(path)) broken.push(`${rel(doc)} -> ${target}`);
+
+      if (!existsSync(path)) {
+        broken.push(`${rel(doc)} -> ${target}  (does not exist)`);
+        continue;
+      }
+
+      // A link to an EMPTY directory resolves here and breaks in CI. Git cannot
+      // store an empty directory, so it is absent from every clone — the local
+      // working tree is the one place on earth where such a link works. This
+      // check exists because exactly that shipped a red build on Sprint 1's
+      // first push: docs/knowledge-base/failures/ was empty, INDEX.md linked it,
+      // and the gate was green locally and red in CI.
+      //
+      // Checking "is it empty" rather than "is it tracked by git" is deliberate:
+      // a tracked-paths check would flag every new file as broken before it is
+      // committed, which is precisely when this gate runs.
+      if (statSync(path).isDirectory() && readdirSync(path).length === 0) {
+        broken.push(
+          `${rel(doc)} -> ${target}  (empty directory — git cannot store it, ` +
+            "so this link works only on this machine; add a .gitkeep or drop the link)",
+        );
+      }
     }
   }
 
   if (broken.length) {
     fail(
-      "Local links pointing at nothing:\n" +
+      "Local links that do not resolve in a fresh clone:\n" +
         broken.map((b) => `      ${b}`).join("\n"),
     );
   } else {

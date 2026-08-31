@@ -11,7 +11,7 @@
 
 | Sprint | Summary | Status | Dates | Test evidence | CI verdict |
 |---|---|---|---|---|---|
-| [Sprint 1](SPRINT-1.md) | Governance harness + the seeded dice roller. Invariant model, workflow loop, agent definitions, knowledge base, registers, doc gate and CI — proven end to end on `src/core/rng.ts`. Gates found 4 BLOCKERs before any code, 3 in the code, and a structural flaw in the workflow that would have made every sprint unclosable. | in progress | 2026-08-31 → | **85 passing (+85 — first sprint, no prior baseline)** | `pending` — not yet pushed |
+| [Sprint 1](SPRINT-1.md) | Governance harness + the seeded dice roller. Invariant model, workflow loop, agent definitions, knowledge base, registers, doc gate and CI — proven end to end on `src/core/rng.ts`. Gates found 4 BLOCKERs before any code, 3 in the code, and a structural flaw in the workflow that would have made every sprint unclosable. | in progress | 2026-08-31 → | **85 passing (+85 — first sprint, no prior baseline)** | run 1 `a2a53a0`: **red** (empty-directory link, `F-007`) — fixed forward; run 2 pending |
 
 ## How to read this table
 

@@ -291,7 +291,39 @@ code-adjacent findings keep the 2-round cap.
 | tests | **85 passing (+85 vs Sprint 0 — first sprint, no prior baseline)** |
 | build | clean, 0.83 kB JS |
 | doc gate | clean — 4 checks, 0 failures: KB INDEX complete (3 records in table rows, 0 orphans, 0 dangling) · sprint ledger complete (1 log in table rows) · **local links resolve (38 checked across 14 documents)** · generated-doc drift dormant |
-| **CI verdict** | `pending` — not yet pushed; awaiting the owner's word per step (7) item 6 |
+| **CI verdict** | see the CI section below |
+
+### CI run 1 — `a2a53a0` — **RED**, and the local gate could not have seen it
+
+Pushed on the owner's word. Both workflows failed, and the failure is worth recording in full
+because it is the first thing this project learned from CI that it could not have learned locally.
+
+| Job | Result |
+|---|---|
+| `Code — types, tests, build` | **success** — typecheck, 85 tests, build all green on Linux |
+| `Doc consistency` | **failure** — `Doc-consistency gate` step |
+| `Deploy → Build site` | **failure** — `All four gates` step; `Publish` **skipped** |
+
+**Cause:** `docs/knowledge-base/failures/` was empty. **Git cannot store an empty directory**, so
+it is absent from every clone, while `INDEX.md` links to it. On the working tree the directory
+exists and the link resolves; on CI's fresh checkout it does not. **The local gate was checking
+the working tree, which is not what a clone gets** — so this was structurally invisible locally,
+not an oversight in running it.
+
+**Fixed forward in-sprint** (per step (7): a red CI means fix forward and repeat from step 6):
+a `.gitkeep` keeps the category present, and `checkLocalLinks` now flags any link to an empty
+directory with the reason. Falsified in both directions before re-pushing. Registered as `F-007`.
+
+**Two things the design got right, worth noting because they are easy to take for granted:**
+
+- **`Publish` was skipped.** Nothing reached the published site from a red repository. That is the
+  whole reason the deploy workflow runs all four gates rather than three — a decision made at the
+  closing review a few hours earlier, on a finding that looked pedantic at the time.
+- **The jobs are independent**, so the green `Code` result was still visible rather than being
+  swallowed by the red one. The signal that mattered — the code is fine, the docs are not —
+  survived.
+
+| **CI verdict** | run 1 on `a2a53a0`: **red**, cause found and fixed forward. Run 2 pending on the fix commit. |
 
 The link count is recorded as a number rather than a word so a later drop in coverage is visible
 as a number — the gate's own lesson, applied to the gate's own evidence.

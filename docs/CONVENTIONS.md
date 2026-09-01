@@ -1,9 +1,11 @@
 # PAUfighter Conventions
 
-> **This file is injected VERBATIM into every agent prompt.** It is the one text every
-> contributor receives — the Orchestrator and each domain agent alike. That is why it is
-> short: it is read on every single task. If it grows to several pages, nobody consciously
-> stops reading it; they just stop.
+> **This file is injected VERBATIM into every agent prompt**, and it is **required reading for
+> human contributors** — who receive nothing verbatim, and so must be pointed here. It binds the
+> Orchestrator, every domain agent, and every contributor's code alike; see
+> [ADR-003](knowledge-base/decisions/ADR-003-what-binds-a-contributor.md) for exactly what does
+> and does not bind a contributor. That is why it is short: it is read on every single task. If it
+> grows to several pages, nobody consciously stops reading it; they just stop.
 
 ---
 

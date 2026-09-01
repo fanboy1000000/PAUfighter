@@ -397,6 +397,20 @@ environment enforcement (`F-003`), a real mechanical guarantee for reviewer read
 path-sort normalisation (`F-004`), the criterion-15 browser confirmation, and a Markdown link
 parser for the doc gate. Each names the sprint that deferred it.
 
+> **Correction, 2026-08-31 (Sprint 2 closing review).** Two errors in the paragraph above, left as
+> written per the no-rewrite rule.
+>
+> 1. **"Seven rows" was a miscount.** Six are enumerated and six were routed. No item was lost in
+>    Sprint 2's restructure — the count was wrong when written, not the backlog.
+> 2. **"Each names the sprint that deferred it" stopped being true** when Sprint 2 replaced the
+>    `Deferred at` column with `ID | Item | Claimed by | Done when`. The attribution was restored
+>    as a `(deferred S1)` prefix inside the item cell, which costs no column, so the claim is true
+>    again by a different mechanism than the one it described.
+>
+> Two of the six also gained register rows in Sprint 2 — the reviewer read-only guarantee became
+> `F-008` and the browser confirmation became `F-009` — because the registration floor takes every
+> WARNING and roadmap-only rows are outside the register's sprint-close re-read.
+
 **Corrections to earlier records.** ADR-001 carries two dated amendments; PAT-001 carries three
 dated corrections. None was rewritten in place.
 

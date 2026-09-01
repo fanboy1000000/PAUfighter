@@ -90,7 +90,8 @@ lives in the linked documents. Agents receive targeted documents, never this who
 
 | Document | Purpose |
 |---|---|
-| [ROADMAP.md](ROADMAP.md) | The living forward view: where the game is heading, a durable backlog of deferred items, and a parking lot for loose ideas. Not the shipped ledger (→ `docs/sprints/INDEX.md`) and not decisions (→ ADRs). |
+| [ROADMAP.md](ROADMAP.md) | The living forward view: the arc, a backlog of items **anyone can pick up and claim**, and a parking lot for loose ideas. Forward-only — not the shipped ledger (→ `docs/sprints/INDEX.md`), not decisions (→ ADRs), not defect dispositions (→ the finding register). **Partly contributor-writable:** the Orchestrator owns the arc, the item set and id minting; the contributor-writable surface is defined once in that file's governance line and not restated here. See [ADR-003](docs/knowledge-base/decisions/ADR-003-what-binds-a-contributor.md). |
+| [docs/knowledge-base/decisions/ADR-003-what-binds-a-contributor.md](docs/knowledge-base/decisions/ADR-003-what-binds-a-contributor.md) | The one citable source for what binds a human contributor: the invariants, CI and the §4 conventions do; the sprint loop does not. Every other file points here rather than asserting it independently. |
 
 ## Governance & Workflow
 

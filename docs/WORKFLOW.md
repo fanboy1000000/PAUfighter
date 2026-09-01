@@ -187,6 +187,17 @@ In this order:
    above the registration floor, with its disposition.
 3. **ROADMAP.md** absorbs every follow-up not scheduled for the next sprint. This is the forcing
    mechanism: nothing is lost by being merely mentioned in conversation.
+
+   **Routing is a step, not a task.** A routed item lands with an id and may carry
+   `Done when: —`. Writing a falsifiable completion criterion is the claimant's first act, not
+   the router's — otherwise nine follow-ups mean nine criteria written at sprint close, and the
+   ones that are hard to word quietly do not get routed at all.
+
+   **A follow-up that already has a register row** and whose disposition is `accepted` with
+   nothing concrete to do is routed **to the register's sprint-close re-read**, not to the
+   Backlog. That is not a loophole: the re-read in `docs/operations/finding-register.md` is the
+   other half of this same forcing function, and a pickup list full of items with no work is a
+   list people stop reading. ROADMAP.md's "Reading these tables" states the membership rule.
 4. **`docs/sprints/INDEX.md`** gets the sprint's row, with **Status: `in progress`** and
    **CI verdict: `pending`**. Both are honest values for a sprint that is not yet closed — the
    push has not happened and the run has not happened — and writing the row now is what lets the

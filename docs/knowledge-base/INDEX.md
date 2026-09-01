@@ -23,6 +23,7 @@ Template: [`TEMPLATE-ADR.md`](TEMPLATE-ADR.md).
 |---|---|---|---|
 | ADR-001 | [TypeScript + Vite + Vitest, DOM-free core](decisions/ADR-001-typescript-vite-vitest-dom-free-core.md) | accepted | The stack, and the rule that the simulation never touches the screen — which is what makes the invariants testable at all. |
 | ADR-002 | [Five invariants; privacy invariant removed](decisions/ADR-002-five-invariants-privacy-invariant-removed.md) | accepted | The invariant set is five, co-equal. The data-privacy candidate was deleted once the game had no personal data; its rules survive as conventions. |
+| ADR-003 | [What binds a human contributor](decisions/ADR-003-what-binds-a-contributor.md) | accepted | The invariants, CI and the §4 conventions bind every contributor; the sprint loop is the Orchestrator's process. Names the one cost: contributor changes get no clarification and no dual review, so they need a human read. |
 
 ## Patterns
 

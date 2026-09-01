@@ -101,7 +101,10 @@ knowing more about the system than before. Not a list of file names.
 
 **Findings registered.** IDs and where they went.
 
-**Follow-ups routed to ROADMAP.md.** Everything discovered and not fixed. Nothing may be left
-only in the conversation.
+**Follow-ups routed.** Per [docs/WORKFLOW.md](../WORKFLOW.md) step (7) item 3 — pointed at rather
+than restated, so the next amendment has one place to land. Two destinations, and every follow-up
+goes to one of them: those with work someone could do go to `ROADMAP.md`'s Backlog; a registered
+finding that is `accepted` with nothing concrete to do goes to the register's sprint-close
+re-read. **Name both sets here.** Nothing may be left only in the conversation.
 
 **Corrections to earlier records.** Appended and dated; never edited in place.

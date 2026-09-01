@@ -21,6 +21,14 @@ validates output.
    your way around the boundary, and never leave a `TODO` in someone else's file.
 3. **`docs/`, `CLAUDE.md`, `ROADMAP.md`, `.github/`, `tools/`, `package.json`, `vite.config.ts`
    and `tsconfig.json` are off limits to every agent.** They are Orchestrator-only.
+
+   **`ROADMAP.md` is Orchestrator-only *for agents*, and no longer flatly so.** Human contributors
+   have a narrow writable surface there, **defined once in that file's governance line** and
+   deliberately not restated here — see
+   [ADR-003](knowledge-base/decisions/ADR-003-what-binds-a-contributor.md). No agent becomes a
+   contributor, so this rule is unchanged for you; it is spelled out because `CLAUDE.md` names
+   this list as canonical, and a flat "Orchestrator-only" here would be the drift that duplication
+   warning exists to prevent.
 4. **Your output must build.** Before you report done, `npx tsc --noEmit` must pass. Output that
    does not compile is not accepted, and it comes straight back to you.
 5. **Never spawn another agent, and never invoke a reviewer.** Only the Orchestrator does that.

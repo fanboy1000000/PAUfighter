@@ -2,10 +2,10 @@
 
 | Field | Value |
 |---|---|
-| **Status** | in progress — records written, all four gates green, awaiting the owner's word to push (step 7 item 6) |
-| **Dates** | 2026-08-31 → |
+| **Status** | complete |
+| **Dates** | 2026-08-31 → 2026-09-01 |
 | **Goal** | Turn the roadmap into a backlog colleagues can pick work from, and settle what binds a human contributor. |
-| **Owner approved** | no |
+| **Owner approved** | yes — 2026-09-01 |
 
 ## What this sprint is, in one paragraph
 
@@ -157,7 +157,7 @@ once in `ROADMAP.md` and pointed at from everywhere else.
 | tests | **85 passing (±0 vs Sprint 1's 85 — no code changed)** |
 | build | clean, 0.83 kB JS |
 | doc gate | clean — 4 checks: KB INDEX complete (4 records) · sprint ledger complete (2 logs) · local links resolve · generated-doc drift dormant |
-| **CI verdict** | `pending` — not yet pushed |
+| **CI verdict** | **green** — run on `701d195`, watched to completion: CI and Deploy both success, site confirmed serving |
 
 ## Record (7)
 
